@@ -1,0 +1,28 @@
+Source: qtchooser
+Section: libdevel
+Priority: optional
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: Timo Jyrinki <timo@debian.org>,
+           Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>,
+           Dmitry Shachnev <mitya57@debian.org>
+Build-Depends: debhelper (>= 9.20141010),
+               dpkg-dev (>= 1.17.14),
+               qtbase5-dev <!stage1 !nocheck>
+Standards-Version: 3.9.8
+Homepage: https://qt-project.org/
+Vcs-Git: https://anonscm.debian.org/git/pkg-kde/qt/qtchooser.git
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-kde/qt/qtchooser.git
+
+Package: qtchooser
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: libqt5core5a (<< 5.5.1+dfsg-17~), libqtcore4 (<< 4:4.8.7+dfsg-7~)
+Replaces: libqt5core5a (<< 5.5.1+dfsg-17~), libqtcore4 (<< 4:4.8.7+dfsg-7~)
+Description: Wrapper to select between Qt development binary versions
+ Qt is a cross-platform C++ application framework. Qt's primary feature
+ is its rich set of widgets that provide standard GUI functionality.
+ .
+ The Qt Chooser provides a wrapper to switch between versions of Qt
+ development binaries when multiple versions like 4 and 5 are installed
+ or local Qt builds are to be used.

@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+export DEB_CXXFLAGS_MAINT_APPEND := $(shell dpkg-buildflags --get CPPFLAGS)
+export LFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	make QTCHOOSER_GLOBAL_DIR=/usr/share:/usr/lib/$(DEB_HOST_MULTIARCH):/usr/lib/$(DEB_HOST_MULTIARCH)/qt-default
+
+override_dh_auto_install:
+	make install INSTALL_ROOT=$(CURDIR)/debian/qtchooser
+
+	mkdir -p $(CURDIR)/debian/qtchooser/usr/share/qtchooser
+	mkdir -p $(CURDIR)/debian/qtchooser/usr/lib/$(DEB_HOST_MULTIARCH)/qtchooser
+
+	for ver in 4 5; do \
+		echo "/usr/lib/$(DEB_HOST_MULTIARCH)/qt$${ver}/bin" > $(CURDIR)/debian/qtchooser/usr/share/qtchooser/qt$${ver}-$(DEB_HOST_MULTIARCH).conf; \
+		echo "/usr/lib/$(DEB_HOST_MULTIARCH)" >> $(CURDIR)/debian/qtchooser/usr/share/qtchooser/qt$${ver}-$(DEB_HOST_MULTIARCH).conf; \
+		ln -s /usr/share/qtchooser/qt$${ver}-$(DEB_HOST_MULTIARCH).conf \
+			$(CURDIR)/debian/qtchooser/usr/lib/$(DEB_HOST_MULTIARCH)/qtchooser/$${ver}.conf; \
+		ln -s /usr/share/qtchooser/qt$${ver}-$(DEB_HOST_MULTIARCH).conf \
+			$(CURDIR)/debian/qtchooser/usr/lib/$(DEB_HOST_MULTIARCH)/qtchooser/qt$${ver}.conf; \
+	done
+
+override_dh_auto_test:
+ifeq (,$(filter stage1,$(DEB_BUILD_PROFILES)))
+ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+	make check QMAKE=/usr/lib/$(DEB_HOST_MULTIARCH)/qt5/bin/qmake
+endif
+endif
