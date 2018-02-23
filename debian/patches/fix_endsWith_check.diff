@@ -1,0 +1,16 @@
+Description: fix checking return value of endsWith
+Author: Dmitry Shachnev <mitya57@debian.org>
+Forwarded: https://codereview.qt-project.org/209718
+Last-Update: 2017-10-29
+
+--- a/src/qtchooser/main.cpp
++++ b/src/qtchooser/main.cpp
+@@ -225,7 +225,7 @@
+     int count = readlink(link, buf, sizeof(buf) - 1);
+     if (count >= 0) {
+         buf[count] = '\0';
+-        if (endsWith(buf, target) == 0) {
++        if (endsWith(buf, target)) {
+             fprintf(stderr, "%s: could not exec '%s' since it links to %s itself. Check your installation.\n",
+                     target, link, target);
+             return true;

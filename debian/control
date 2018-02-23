@@ -5,10 +5,10 @@ Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
 Uploaders: Timo Jyrinki <timo@debian.org>,
            Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>,
            Dmitry Shachnev <mitya57@debian.org>
-Build-Depends: debhelper (>= 9.20141010),
+Build-Depends: debhelper (>= 9),
                dpkg-dev (>= 1.17.14),
-               qtbase5-dev <!stage1 !nocheck>
-Standards-Version: 3.9.8
+               qtbase5-dev (>= 5.9.2+dfsg-3~) <!stage1 !nocheck>
+Standards-Version: 4.1.2
 Homepage: https://qt-project.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-kde/qt/qtchooser.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-kde/qt/qtchooser.git
@@ -17,8 +17,14 @@ Package: qtchooser
 Architecture: any
 Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libqt5core5a (<< 5.5.1+dfsg-17~), libqtcore4 (<< 4:4.8.7+dfsg-7~)
-Replaces: libqt5core5a (<< 5.5.1+dfsg-17~), libqtcore4 (<< 4:4.8.7+dfsg-7~)
+Breaks: libqt5core5a (<< 5.5.1+dfsg-17~),
+        libqtcore4 (<< 4:4.8.7+dfsg-7~),
+        qtbase5-dev-tools (<< 5.9.2+dfsg-3~),
+        qtchooser-bin (<< 64-ga1b6736-2~),
+        qttools5-dev-tools (<< 5.9.2-2~)
+Replaces: libqt5core5a (<< 5.5.1+dfsg-17~),
+          libqtcore4 (<< 4:4.8.7+dfsg-7~),
+          qtchooser-bin (<< 64-ga1b6736-2~)
 Description: Wrapper to select between Qt development binary versions
  Qt is a cross-platform C++ application framework. Qt's primary feature
  is its rich set of widgets that provide standard GUI functionality.

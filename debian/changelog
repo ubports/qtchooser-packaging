@@ -1,8 +1,57 @@
-qtchooser (63-g13a3d08-1ubports1) xenial; urgency=medium
+qtchooser (64-ga1b6736-5ubports1) xenial; urgency=medium
 
-  * Import to UBports 
+  * Build for xenial 
 
- -- Marius Gripsgard <marius@ubports.com>  Mon, 15 Jan 2018 13:09:22 +0100
+ -- Marius <mariogrip@ubuntu.com>  Fri, 23 Feb 2018 17:00:38 +0100
+
+qtchooser (64-ga1b6736-5) unstable; urgency=medium
+
+  * Add Breaks/Replaces against qtchooser-bin (closes: #884823).
+  * Update debian/copyright.
+  * Use non-multiarch location of qmake for running the tests.
+  * Update debhelper compat level to 10.
+  * Bump Standards-Version to 4.1.2, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Fri, 22 Dec 2017 00:00:57 +0300
+
+qtchooser (64-ga1b6736-4) unstable; urgency=medium
+
+  [ Dmitry Shachnev ]
+  * Update Qt 5 configuration file for the new binaries path (closes: #880159).
+    - Add Breaks: against old qtbase5-dev-tools and qttools5-dev-tools versions.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Mon, 30 Oct 2017 10:12:41 -0300
+
+qtchooser (64-ga1b6736-3) unstable; urgency=medium
+
+  * Add a patch to fix checking return value of endsWith. This should
+    make -run-tool argument work again with new Qt packages.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sun, 29 Oct 2017 22:33:16 +0300
+
+qtchooser (64-ga1b6736-2) unstable; urgency=medium
+
+  * Revert the split done in the previous upload. It is not needed with
+    our new Qt cross-building approach when we call build architecture
+    versions of qmake and other Qt tools.
+  * Bump Standards-Version to 4.1.1, no changes needed.
+  * Fix order of entries in debian/copyright.
+  * Upload to unstable.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Fri, 20 Oct 2017 15:12:46 +0300
+
+qtchooser (64-ga1b6736-1) experimental; urgency=medium
+
+  [ Dmitry Shachnev ]
+  * New upstream git snapshot.
+  * Split the files in /usr/bin into a separate package qtchooser-bin.
+    Make the main qtchooser package Multi-Arch: same (see bug #781226).
+    Thanks to Helmut Grohne for the suggestions.
+
+  [ Helmut Grohne ]
+  * Fix FTCBFS: Pass triplet-prefixed CXX to make (closes: #836457).
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Sat, 26 Aug 2017 11:04:18 +0300
 
 qtchooser (63-g13a3d08-1) unstable; urgency=medium
 
