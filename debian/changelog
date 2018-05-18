@@ -1,3 +1,9 @@
+qtchooser (64-ga1b6736-5ubports2) xenial; urgency=medium
+
+  * No change rebuild 
+
+ -- Marius <mariogrip@ubports.com>  Fri, 18 May 2018 12:59:24 +0200
+
 qtchooser (64-ga1b6736-5ubports1) xenial; urgency=medium
 
   * Build for xenial 
